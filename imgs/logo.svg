@@ -1,0 +1,56 @@
+<svg width="300" height="90" viewBox="0 0 300 90" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Litoral Português</title>
+  <desc>Logo com círculo ilustrado de oceano, sol e costa para o site Litoral Português</desc>
+
+  <style>
+    .tagline  { font-family: 'Lato', Arial, sans-serif; font-size: 6px; fill: #5a7a8a; letter-spacing: 1.6px; }
+    .brand    { font-family: 'Playfair Display', Georgia, serif; font-size: 13px; font-weight: 600; fill: #1a3a4a; }
+    .sub      { font-family: 'Playfair Display', Georgia, serif; font-size: 6.5px; fill: #1a6b8a; letter-spacing: 1.2px; }
+  </style>
+
+  <g transform="translate(36, 45)">
+
+    <circle cx="0" cy="0" r="30" fill="#e8f4fa" stroke="#a8d4e8" stroke-width="0.8"/>
+
+    <clipPath id="cc">
+      <circle cx="0" cy="0" r="28"/>
+    </clipPath>
+
+    <g clip-path="url(#cc)">
+      <rect x="-28" y="-28" width="56" height="56" fill="#dff0f8"/>
+
+      <ellipse cx="5" cy="-13" rx="8.5" ry="8.5" fill="#f5c842" opacity="0.92"/>
+      <line x1="5"  y1="-23" x2="5"  y2="-26" stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+      <line x1="5"  y1="-3"  x2="5"  y2="-1"  stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+      <line x1="-4" y1="-13" x2="-7" y2="-13" stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+      <line x1="14" y1="-13" x2="17" y2="-13" stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+      <line x1="-1" y1="-19" x2="-3" y2="-21" stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+      <line x1="11" y1="-7"  x2="13" y2="-5"  stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+      <line x1="11" y1="-19" x2="13" y2="-21" stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+      <line x1="-1" y1="-7"  x2="-3" y2="-5"  stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+
+      <rect x="-28" y="3" width="56" height="25" fill="#3a9dbf" opacity="0.82"/>
+
+      <path d="M-28 3 Q-21 0 -14 3 Q-7 6 0 3 Q7 0 14 3 Q21 6 28 3 L28 10 Q21 7 14 10 Q7 13 0 10 Q-7 7 -14 10 Q-21 13 -28 10 Z" fill="#5ab8d8" opacity="0.9"/>
+      <path d="M-28 12 Q-21 9 -14 12 Q-7 15 0 12 Q7 9 14 12 Q21 15 28 12 L28 28 L-28 28 Z" fill="#2e8ca8" opacity="0.8"/>
+
+      <path d="M-28 2 Q-20 -1 -14 2 Q-8 5 0 2 Q6 -1 14 2 Q22 5 28 2 L28 7 L-28 7 Z" fill="#c8e8b0" opacity="0.95"/>
+
+      <path d="M-13 2 Q-11 -4 -8 -7 Q-5 -10 -3 -8 Q-1 -6 -2 -2 Q-5 0 -8 1 Z" fill="#4a9a3a" opacity="0.85"/>
+      <path d="M-9 2 Q-6 -5 -3 -9 Q0 -12 2 -10 Q4 -7 3 -3 Q1 0 -3 1 Z" fill="#5aaa4a" opacity="0.8"/>
+    </g>
+
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#7bbcd8" stroke-width="0.8"/>
+  </g>
+
+  <g transform="translate(74, 30)">
+    <text class="tagline">LITORAL</text>
+    <text class="brand" y="16">Português</text>
+    <text class="sub"   y="27">Praias &amp; Destinos</text>
+    <line x1="0" y1="33" x2="142" y2="33" stroke="#a8d4e8" stroke-width="0.5"/>
+    <path d="M0 39 Q8 36 16 39 Q24 42 32 39"   fill="none" stroke="#3a9dbf" stroke-width="0.8" stroke-linecap="round"/>
+    <path d="M36 39 Q44 36 52 39 Q60 42 68 39"  fill="none" stroke="#3a9dbf" stroke-width="0.8" stroke-linecap="round"/>
+    <path d="M72 39 Q80 36 88 39 Q96 42 104 39" fill="none" stroke="#3a9dbf" stroke-width="0.8" stroke-linecap="round"/>
+    <path d="M108 39 Q116 36 124 39 Q132 42 140 39" fill="none" stroke="#3a9dbf" stroke-width="0.8" stroke-linecap="round"/>
+  </g>
+</svg>
