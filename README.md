@@ -91,34 +91,6 @@ CREATE TABLE fotos_praias (
 
 ---
 
-## ⚙️ Instalação
-
-1. **Clonar o repositório**
-   ```bash
-   git clone https://github.com/teu-utilizador/praias-portugal.git
-   ```
-
-2. **Mover para a pasta do servidor web** (ex: `htdocs` no XAMPP ou `www` no WAMP)
-
-3. **Criar a base de dados** e executar o SQL acima
-
-4. **Configurar a ligação** em `includes/funcoes.php`:
-   ```php
-   function criar_conexao() {
-       return new PDO("mysql:host=localhost;dbname=praias;charset=utf8", "utilizador", "password");
-   }
-   ```
-
-5. **Criar a pasta de uploads** e garantir permissões de escrita:
-   ```bash
-   mkdir -p uploads/praias
-   chmod 755 uploads/praias
-   ```
-
-6. Abrir no browser: `http://localhost/praias-portugal`
-
----
-
 ## 📸 Upload de fotos
 
 - Formatos suportados: **JPG, PNG, WEBP**
@@ -130,4 +102,4 @@ CREATE TABLE fotos_praias (
 
 ## 📄 Licença
 
-Projeto de uso livre para fins académicos e pessoais.
+Este projeto foi desenvolvido no âmbito do curso CET em Aplicações de Informática de Gestão, na unidade curricular UC0606- Desenvolver Programas em Linguagem Estruturada.
