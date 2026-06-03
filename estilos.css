@@ -1,0 +1,874 @@
+/* ============================================
+   VARIÁVEIS & FONTES
+   ============================================ */
+
+:root {
+    --bege_01: rgb(242, 252, 212);
+    --cor_main: rgba(165,204,246,0.7);
+    --cor_cxinha: rgba(242, 252, 212, 0.7);
+    --cor_cxinha2: rgba(242, 252, 212, 0.9);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@400;700&display=swap');
+
+/* californication → títulos decorativos */
+.californication, [class*="californication"],
+.tituloCxinha, .card-praia-nome, .praia-detalhe-nome,
+.praia-galeria-titulo, .praia-descricao-titulo, .fotos-secao-titulo {
+    font-family: 'Playfair Display', Georgia, serif !important;
+}
+
+/* arsenica → texto corrente / botões */
+.arsenica, [class*="arsenica"],
+.btn-voltar, .detalhes-subtitulo, .tag-praia, .card-praia-btn,
+.btn-acao, .btn-upload, .btn-adicionar, .upload-texto,
+.praia-detalhe-regiao, .info-label, .foto-ordem, .sem-fotos,
+.aviso-sucesso, .aviso-erro {
+    font-family: 'Lato', Arial, sans-serif !important;
+}
+
+
+/* ============================================
+   BASE — BODY, MAIN, FOOTER
+   ============================================ */
+
+body {
+    margin: 0;
+    background-image: url("imgs/fundo2.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: var(--cor_main);
+    padding: 20px 30px;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+
+footer {
+    text-align: center;
+    background-color: var(--bege_01);
+    padding: 10px;
+    font-family: 'Playfair Display', Georgia, serif;
+    border-top: 2px solid rgba(26,107,138,0.2);
+}
+footer p {
+    margin: 0;
+}
+
+textarea.class-inputs {
+    min-height: 300px;
+    min-width: 300px;
+}
+
+/* Modal de avisos */
+#janelaAvisos_id {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+#aviso_id {
+    background-color: var(--cor_cxinha);
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+}
+
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+header {
+    background-color: var(--bege_01);
+    border-bottom: 2px solid rgba(26,107,138,0.2);
+}
+
+.cxFlex80 {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 12px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+#imgLogo {
+    width: 160px;
+    height: auto;
+}
+
+#slogan {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a3a4a;
+    margin: 0;
+    letter-spacing: 0.2px;
+    flex: 1;
+    text-align: center;
+}
+
+/* Formulário de login */
+#id_formLogin {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+#agrupaInputs {
+    display: flex;
+    gap: 4px;
+}
+.input-login {
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    border: 1px solid rgba(26,107,138,0.35);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.8);
+    color: #1a3a4a;
+    width: 90px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+.input-login:focus {
+    border-color: rgba(26,107,138,0.65);
+    background: #fff;
+}
+.input-login::placeholder {
+    color: #aaa;
+    font-size: 0.78rem;
+}
+#id_formLogin input[type="submit"] {
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    background: rgba(26,107,138,0.85);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    transition: background 0.2s;
+}
+#id_formLogin input[type="submit"]:hover {
+    background: #0d4a63;
+}
+
+
+/* ============================================
+   BARRA DE PESQUISA + NAV
+   ============================================ */
+
+#barraPesquisa {
+    width: 100%;
+    background-color: rgba(26,107,138,0.12);
+    border-bottom: 1px solid rgba(26,107,138,0.2);
+    padding: 10px 20px;
+    margin: 0 0 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 12px;
+}
+
+#barraPesquisa nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+#barraPesquisa nav a {
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #0d4a63;
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    letter-spacing: 0.2px;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+#barraPesquisa nav a:first-child {
+    background: rgba(26,107,138,0.1);
+    border-color: rgba(26,107,138,0.25);
+    margin-left: 0;
+}
+#barraPesquisa nav a:hover {
+    background: rgba(26,107,138,0.15);
+    border-color: rgba(26,107,138,0.35);
+    color: #07354a;
+}
+#barraPesquisa nav a:first-child:hover {
+    background: rgba(26,107,138,0.22);
+}
+
+/* Formulário de pesquisa */
+#barraPesquisa form {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+}
+.input-pesquisa {
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.83rem;
+    padding: 6px 14px;
+    border: 1px solid rgba(26,107,138,0.35);
+    border-right: none;
+    border-radius: 20px 0 0 20px;
+    background: rgba(255,255,255,0.75);
+    color: #1a3a4a;
+    outline: none;
+    width: 180px;
+    transition: border-color 0.2s, background 0.2s;
+}
+.input-pesquisa:focus {
+    border-color: rgba(26,107,138,0.7);
+    background: rgba(255,255,255,0.95);
+}
+#barraPesquisa form input[type="submit"] {
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.83rem;
+    font-weight: 700;
+    padding: 6px 16px;
+    background: rgba(26,107,138,0.85);
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    transition: background 0.2s;
+    letter-spacing: 0.2px;
+}
+#barraPesquisa form input[type="submit"]:hover {
+    background: #0d4a63;
+}
+
+
+/* ============================================
+   INDEX.PHP — introdução e cards de região
+   ============================================ */
+
+/* Esconde elementos antigos substituídos */
+#p_01        { display: none; }
+#p_titulo_01 { display: none; }
+
+/* Bloco introdutório */
+.intro-descricao {
+    background: rgba(255,255,255,0.55);
+    border-left: 4px solid rgba(26,107,138,0.5);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 20px 0 28px;
+}
+.intro-texto {
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #2a3a4a;
+    margin: 0;
+}
+
+/* Título da secção de destinos */
+.destinos-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.destinos-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a3a4a;
+    margin: 0;
+    white-space: nowrap;
+}
+.destinos-linha {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(26,107,138,0.4), transparent);
+}
+
+/* Grid de regiões */
+.cxFlex100 {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* Card de região */
+.cxinhaRegiao {
+    width: 22%;
+    margin: 1%;
+    padding: 0;
+    background-color: var(--cor_cxinha);
+    border-radius: 10px;
+    border: 1px solid rgba(26,107,138,0.15);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.cxinhaRegiao:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+    background-color: var(--cor_cxinha2);
+}
+
+.regiao-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 22px 14px 16px;
+    text-decoration: none;
+    color: inherit;
+}
+.regiao-emoji {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    display: block;
+    line-height: 1;
+}
+.tituloCxinha {
+    text-align: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #1a3a4a;
+    margin: 0 0 10px;
+    line-height: 1.3;
+}
+.regiao-ver {
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.75rem;
+    color: #1a6b8a;
+    letter-spacing: 0.3px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+.cxinhaRegiao:hover .regiao-ver {
+    opacity: 1;
+}
+
+/* Card com imagem de fundo (ex: Algarve, Costa Vicentina) */
+.cxinha-com-foto {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.cxinha-com-foto::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(10,40,60,0.42);
+    border-radius: 10px;
+    transition: background 0.25s ease;
+    z-index: 0;
+}
+.cxinha-com-foto:hover::before {
+    background: rgba(10,40,60,0.28);
+}
+.cxinha-com-foto .regiao-link {
+    position: relative;
+    z-index: 1;
+}
+.cxinha-com-foto .tituloCxinha {
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+.cxinha-com-foto .regiao-emoji {
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
+}
+.cxinha-com-foto .regiao-ver {
+    color: rgba(255,255,255,0.85);
+}
+
+
+/* ============================================
+   DETALHES.PHP — lista de praias por região
+   ============================================ */
+
+.detalhes-topo {
+    padding: 10px 0 5px;
+}
+
+.btn-voltar {
+    display: inline-block;
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.9rem;
+    color: #2c5f2e;
+    text-decoration: none;
+    padding: 5px 12px;
+    border: 1px solid #2c5f2e;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    transition: background 0.2s, color 0.2s;
+}
+.btn-voltar:hover {
+    background: #2c5f2e;
+    color: #fff;
+}
+
+.detalhes-subtitulo {
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0 0 16px;
+}
+
+.praias-grid { gap: 14px; }
+
+.card-praia {
+    width: 23%;
+    min-width: 200px;
+    margin: 1%;
+    background-color: var(--cor_cxinha2);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+.card-praia:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-praia-img {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, rgba(26,107,138,0.3), rgba(165,204,246,0.5));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.card-praia-foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+.card-praia:hover .card-praia-foto {
+    transform: scale(1.05);
+}
+
+.card-praia-corpo {
+    padding: 12px 14px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.card-praia-nome {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    margin: 0 0 8px;
+    color: #1a3a4a;
+}
+.card-praia-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 8px;
+}
+.meta-item { font-size: 0.78rem; color: #444; }
+
+.card-praia-desc {
+    font-size: 0.8rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+.card-praia-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+.tag-praia {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-family: 'Lato', Arial, sans-serif;
+}
+.tag-sim { background: rgba(100,180,100,0.25); color: #1a5e1a; border: 1px solid rgba(100,180,100,0.4); }
+.tag-nao { background: rgba(200,80,80,0.15);  color: #7a1a1a; border: 1px solid rgba(200,80,80,0.3); }
+
+.card-praia-botoes {
+    display: flex;
+    gap: 6px;
+}
+.card-praia-btn {
+    flex: 1;
+    display: block;
+    text-align: center;
+    background: rgba(26,107,138,0.15);
+    color: #0d4a63;
+    text-decoration: none;
+    padding: 7px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-family: 'Lato', Arial, sans-serif;
+    border: 1px solid rgba(26,107,138,0.3);
+    transition: background 0.2s, color 0.2s;
+}
+.card-praia-btn:hover { background: #1a6b8a; color: #fff; }
+.btn-fotos { flex: 0 0 auto; padding: 7px 10px; font-size: 1rem; }
+
+.sem-resultados { text-align: center; padding: 40px 20px; color: #555; }
+.btn-adicionar {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 20px;
+    background: #1a6b8a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-family: 'Lato', Arial, sans-serif;
+}
+
+
+/* ============================================
+   PRAIA.PHP — detalhe individual
+   ============================================ */
+
+.praia-detalhe-wrap {
+    background-color: var(--cor_cxinha2);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 10px 0 30px;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+
+.praia-detalhe-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.praia-detalhe-icon {
+    font-size: 3rem;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(26,107,138,0.3), rgba(165,204,246,0.5));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.praia-detalhe-nome {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.8rem;
+    margin: 0 0 4px;
+    color: #1a3a4a;
+}
+.praia-detalhe-regiao {
+    font-size: 0.88rem;
+    color: #555;
+    margin: 0;
+    font-family: 'Lato', Arial, sans-serif;
+}
+
+.praia-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.praia-info-card {
+    background: rgba(255,255,255,0.7);
+    border-radius: 8px;
+    padding: 10px 14px;
+    border: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.praia-info-card.info-sim { border-color: rgba(100,180,100,0.4); background: rgba(100,180,100,0.12); }
+.praia-info-card.info-nao { border-color: rgba(200,80,80,0.3);  background: rgba(200,80,80,0.08); }
+.info-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #777;
+    font-family: 'Lato', Arial, sans-serif;
+}
+.info-valor { font-size: 0.92rem; font-weight: bold; color: #1a3a4a; }
+
+.praia-descricao {
+    background: rgba(255,255,255,0.6);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+    border-left: 4px solid rgba(26,107,138,0.5);
+}
+.praia-descricao-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    color: #0d4a63;
+    margin: 0 0 8px;
+}
+.praia-descricao-texto { font-size: 0.9rem; line-height: 1.7; color: #333; margin: 0; }
+
+/* Galeria */
+.praia-galeria { margin-bottom: 20px; }
+.praia-galeria-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    color: #0d4a63;
+    margin: 0 0 10px;
+}
+.galeria-capa-wrap {
+    width: 100%;
+    height: auto;
+    min-height: 220px;
+    max-height: 380px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    background: rgba(165,204,246,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.galeria-capa-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    max-height: 380px;
+}
+.galeria-capa-img:hover { opacity: 0.93; }
+.galeria-thumbs { display: flex; gap: 8px; flex-wrap: wrap; }
+.galeria-thumb {
+    width: 72px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+}
+.galeria-thumb:hover        { transform: scale(1.05); }
+.galeria-thumb.thumb-active { border-color: #1a6b8a; }
+.galeria-sem-foto { font-size: 3rem; }
+
+/* Lightbox */
+#lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+#lightbox.lb-open { display: flex; }
+#lightbox img { max-width: 90vw; max-height: 88vh; border-radius: 8px; }
+#lb-fechar {
+    position: fixed;
+    top: 16px;
+    right: 22px;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    background: none;
+    border: none;
+}
+
+/* Botões de ação */
+.praia-acoes {
+    display: flex;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+}
+.btn-acao {
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.85rem;
+    transition: opacity 0.2s;
+}
+.btn-acao:hover   { opacity: 0.8; }
+.btn-editar       { background: rgba(26,107,138,0.15);  color: #0d4a63; border: 1px solid rgba(26,107,138,0.3); }
+.btn-eliminar     { background: rgba(200,80,80,0.12);   color: #7a1a1a; border: 1px solid rgba(200,80,80,0.3); }
+.btn-fotos-gerir  { background: rgba(180,140,20,0.12);  color: #5a4000; border: 1px solid rgba(180,140,20,0.3); }
+
+
+/* ============================================
+   FOTOS.PHP — gestão de uploads
+   ============================================ */
+
+.fotos-secao-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem;
+    color: #0d4a63;
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.fotos-count {
+    background: #1a6b8a;
+    color: #fff;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-family: 'Lato', Arial, sans-serif;
+}
+
+.fotos-upload-wrap {
+    background: var(--cor_cxinha2);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+.upload-area {
+    border: 2px dashed rgba(26,107,138,0.4);
+    border-radius: 10px;
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    background: rgba(255,255,255,0.5);
+}
+.upload-area:hover,
+.upload-area.drag-over {
+    background: rgba(165,204,246,0.3);
+    border-color: #1a6b8a;
+}
+.upload-icone { font-size: 2.2rem; display: block; margin-bottom: 8px; }
+.upload-texto { font-family: 'Lato', Arial, sans-serif; font-size: 0.95rem; color: #1a3a4a; margin: 0 0 4px; }
+.upload-sub   { font-size: 0.75rem; color: #777; margin: 0; }
+
+.preview-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.preview-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.preview-item img  { width: 90px; height: 68px; object-fit: cover; border-radius: 6px; border: 1px solid rgba(0,0,0,0.1); }
+.preview-item span { font-size: 0.68rem; color: #666; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.btn-upload {
+    margin-top: 14px;
+    padding: 9px 22px;
+    background: #1a6b8a;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-upload:hover { background: #0d4a63; }
+
+.fotos-galeria-wrap {
+    background: var(--cor_cxinha2);
+    border-radius: 10px;
+    padding: 18px;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+.fotos-admin-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+.foto-admin-card {
+    width: 160px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: #fff;
+}
+.foto-admin-img { width: 100%; height: 110px; object-fit: cover; display: block; }
+.foto-admin-acoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 8px;
+}
+.foto-ordem { font-size: 0.7rem; color: #888; font-family: 'Lato', Arial, sans-serif; }
+.btn-apagar-foto {
+    font-size: 0.72rem;
+    color: #c0392b;
+    text-decoration: none;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.btn-apagar-foto:hover { background: rgba(200,80,80,0.12); }
+
+.sem-fotos { color: #888; font-size: 0.88rem; font-family: 'Lato', Arial, sans-serif; }
+
+.aviso-sucesso {
+    background: rgba(100,180,100,0.2);
+    color: #1a5e1a;
+    border: 1px solid rgba(100,180,100,0.4);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 14px;
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.88rem;
+}
+.aviso-erro {
+    background: rgba(200,80,80,0.12);
+    color: #7a1a1a;
+    border: 1px solid rgba(200,80,80,0.3);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 14px;
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 0.88rem;
+}
+
+
+/* ============================================
+   RESPONSIVO
+   ============================================ */
+
+@media (max-width: 900px) {
+    .cxinhaRegiao     { width: 44%; }
+    .card-praia       { width: 44%; }
+    .praia-info-grid  { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+    .cxinhaRegiao           { width: 94%; }
+    .card-praia             { width: 94%; }
+    .praia-info-grid        { grid-template-columns: 1fr 1fr; }
+    .praia-detalhe-header   { flex-direction: column; text-align: center; }
+    .fotos-admin-grid       { justify-content: center; }
+    .cxFlex80               { padding: 10px 16px; }
+    #slogan                 { font-size: 1rem; }
+}
