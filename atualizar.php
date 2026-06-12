@@ -4,20 +4,21 @@ $conexao = criar_conexao();
 
 $resposta = "";
 if(!isset($_GET['id_praia'])){
-    $sql        = "SELECT * FROM praias";
-    $stmt       = $conexao->query($sql);
-    $resposta   = $stmt->fetchAll();
+    $sql      = "SELECT * FROM praias ORDER BY nome_praia ASC";
+    $stmt     = $conexao->query($sql);
+    $resposta = $stmt->fetchAll();
 }
 
-if($_SERVER["REQUEST_METHOD"]=="GET" && isset($_GET['id_praia'])){
-    $sql            = "SELECT * FROM regioes";
-    $stmt           = $conexao->query($sql);
-    $regioes        = $stmt->fetchAll();
+if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id_praia'])){
+    $sql  = "SELECT * FROM regioes";
+    $stmt = $conexao->query($sql);
+    $regioes = $stmt->fetchAll();
 
-    $sql            = "SELECT * FROM praias WHERE id_praia=?";
-    $stmt           = $conexao->prepare($sql);
+    $sql  = "SELECT * FROM praias WHERE id_praia=?";
+    $stmt = $conexao->prepare($sql);
     $stmt->execute([$_GET['id_praia']]);
-    $dados_praia    = $stmt->fetch();
+    $dados_praia = $stmt->fetch();
+
     $id             = $dados_praia['id_praia'];
     $regiao_id      = $dados_praia['id_regiao'];
     $nome           = $dados_praia['nome_praia'];
@@ -26,30 +27,10 @@ if($_SERVER["REQUEST_METHOD"]=="GET" && isset($_GET['id_praia'])){
     $estacionamento = $dados_praia['possui_estacionamento'];
     $restaurante    = $dados_praia['possui_restaurante'];
     $descricao      = $dados_praia['descricao'];
-
-    if($restaurante == 0){
-        $radioRestauranteSimSelected = "";
-        $radioRestauranteNaoSelected = "checked";
-    }elseif ($restaurante == 1){
-        $radioRestauranteSimSelected = "checked";
-        $radioRestauranteNaoSelected = "";   
-    }
-    
-    if($estacionamento == 0){
-        $radioEstacionamentoSimSelected = "";
-        $radioEstacionamentoNaoSelected = "checked";
-    }elseif ($estacionamento == 1){
-        $radioEstacionamentoSimSelected = "checked";
-        $radioEstacionamentoNaoSelected = "";   
-    }
-    
 }
 
-
-
-
-if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['fnome'])){
-    $sql   = "UPDATE praias SET nome_praia=?, localizacao=?, concelho=?, possui_estacionamento=?, possui_restaurante=?, descricao=?, id_regiao=? WHERE id_praia=?";
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fnome'])){
+    $sql = "UPDATE praias SET nome_praia=?, localizacao=?, concelho=?, possui_estacionamento=?, possui_restaurante=?, descricao=?, id_regiao=? WHERE id_praia=?";
     $atArray = [
         $_POST['fnome'],
         $_POST['flocalizacao'],
@@ -59,15 +40,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['fnome'])){
         $_POST['fdescricao'],
         $_POST['fregiao'],
         $_POST['fid']
-
     ];
-
     $stmt = $conexao->prepare($sql);
     $stmt->execute($atArray);
     echo "Praia atualizada";
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -77,63 +54,106 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['fnome'])){
 
 <body>
     <?php require_once "includes/header.php"; ?>
+
     <main>
         <?php require_once "includes/pesquisa_e_nav.php"; ?>
 
-        <p id="p_titulo_01">Atualizar praia</p>
-        <br>
-        <div>
-
-            <!-- 1º passo -->
-            <?php if(!isset($_GET['id_praia'])): ?>
-                <?php foreach($resposta as $praias): ?>
-                    <a href="atualizar.php?id_praia=<?= $praias['id_praia'] ?>" class="lista-link"> <?= $praias['nome_praia'] ?> </a> <br><br>
-                <?php endforeach; ?>
-            <?php endif; ?>
-
-            <!-- 2º passo -->
-            <?php if($_SERVER["REQUEST_METHOD"]=="GET" && isset($_GET['id_praia'])): ?>
-            <form method="POST" action="">
-                <input type="hidden" name="fid" value="<?=$id?>">
-                <strong>Nome da praia</strong> <br><br>
-                <input type="text" name="fnome" placeholder="Nome da praia" class="class-inputs" value="<?=$nome?>" required> <br><br>
-                <select name="fregiao" required> 
-                    <option value="" disabled>Escolha uma região</option>
-                    <?php foreach($regioes AS $regiao): ?>
-                        <?php 
-                        if ($regiao_id == $regiao['id_regiao']){
-                            $select = "selected";
-                        }else{
-                            $select = "";
-                        }
-                        ?>
-                        <option value="<?php echo $regiao['id_regiao']?>" <?=$select?>><?=$regiao['nome_regiao']?></option>
-                    <?php endforeach; ?>
-                </select><br><br>
-                <strong>Localização</strong> <br><br>
-                <input type="text" name="flocalizacao" placeholder="Localizacao" class="class-inputs" required value="<?=$localizacao?>"> <br><br>
-                <strong>Concelho</strong> <br><br>
-                <input type="text" name="fconcelho" placeholder="Concelho" class="class-inputs" required value="<?=$concelho?>"> <br><br>
-                <strong>Estacionamento:</strong> <br><br>
-                <input type="radio" name="festacionamento" value="1" 
-                <?=$radioEstacionamentoSimSelected?>> Sim <br><br>
-                <input type="radio" name="festacionamento" value="0" 
-                <?=$radioEstacionamentoNaoSelected?>> Não <br><br>
-                <strong>Restaurante:</strong> <br><br>
-                <input type="radio" name="frestaurante" value="1" 
-                <?=$radioRestauranteSimSelected?>> Sim <br><br>
-                <input type="radio" name="frestaurante" value="0" 
-                <?=$radioRestauranteNaoSelected?>> Não <br><br>
-                <strong>Texto descritivo</strong> <br><br>
-                <textarea name="fdescricao" placeholder="Texto descritivo" class="class-inputs" required><?=$descricao?></textarea> <br><br>
-                <input type="submit" value="atualizar"> 
-                <input type="reset" value="apagar">
-            </form>
-            <?php endif; ?>
-            <br><br><br><br>
+        <div class="detalhes-topo">
+            <a href="index.php" class="btn-voltar">&#8592; Voltar</a>
         </div>
+
+        <p id="p_titulo_01">Atualizar praia</p>
+
+        <!-- 1º passo: escolher praia -->
+        <?php if(!isset($_GET['id_praia'])): ?>
+            <p class="detalhes-subtitulo"><?= count($resposta) ?> praia<?= count($resposta) != 1 ? 's' : '' ?> disponíve<?= count($resposta) != 1 ? 'is' : 'l' ?></p>
+            <div class="atualizar-lista">
+                <?php foreach($resposta as $praia): ?>
+                    <div class="atualizar-item">
+                        <span class="atualizar-nome">🏖️ <?= htmlspecialchars($praia['nome_praia']) ?></span>
+                        <a href="atualizar.php?id_praia=<?= $praia['id_praia'] ?>" class="btn-editar-item">✏️ Editar</a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- 2º passo: formulário de edição -->
+        <?php if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id_praia'])): ?>
+            <div class="form-wrap">
+                <form method="POST" action="">
+                    <input type="hidden" name="fid" value="<?= $id ?>">
+
+                    <div class="form-row">
+                        <div class="form-section">
+                            <label class="form-label" for="fnome">Nome da praia</label>
+                            <input type="text" id="fnome" name="fnome" class="form-input" value="<?= htmlspecialchars($nome) ?>" required>
+                        </div>
+                        <div class="form-section">
+                            <label class="form-label" for="fregiao">Região</label>
+                            <select id="fregiao" name="fregiao" class="form-select" required>
+                                <option value="" disabled>Escolha uma região</option>
+                                <?php foreach($regioes as $regiao): ?>
+                                    <option value="<?= $regiao['id_regiao'] ?>" <?= $regiao_id == $regiao['id_regiao'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($regiao['nome_regiao']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-section">
+                            <label class="form-label" for="flocalizacao">Localização</label>
+                            <input type="text" id="flocalizacao" name="flocalizacao" class="form-input" value="<?= htmlspecialchars($localizacao) ?>" required>
+                        </div>
+                        <div class="form-section">
+                            <label class="form-label" for="fconcelho">Concelho</label>
+                            <input type="text" id="fconcelho" name="fconcelho" class="form-input" value="<?= htmlspecialchars($concelho) ?>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-section">
+                            <label class="form-label">🅿️ Estacionamento</label>
+                            <div class="radio-group">
+                                <label class="radio-item">
+                                    <input type="radio" name="festacionamento" value="1" <?= $estacionamento == 1 ? 'checked' : '' ?>> Sim
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="festacionamento" value="0" <?= $estacionamento == 0 ? 'checked' : '' ?>> Não
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-section">
+                            <label class="form-label">🍽️ Restaurante</label>
+                            <div class="radio-group">
+                                <label class="radio-item">
+                                    <input type="radio" name="frestaurante" value="1" <?= $restaurante == 1 ? 'checked' : '' ?>> Sim
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="frestaurante" value="0" <?= $restaurante == 0 ? 'checked' : '' ?>> Não
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <label class="form-label" for="fdescricao">Descrição</label>
+                        <textarea id="fdescricao" name="fdescricao" class="form-textarea" required><?= htmlspecialchars($descricao) ?></textarea>
+                    </div>
+
+                    <div class="form-acoes">
+                        <button type="submit" class="btn-form-submit">💾 Guardar alterações</button>
+                        <button type="reset" class="btn-form-reset">Repor</button>
+                    </div>
+
+                </form>
+            </div>
+        <?php endif; ?>
+
     </main>
-     <?php require_once "includes/footer.php" ?>  
-     <?php require_once "includes/janela_avisos.php" ?> 
+
+    <?php require_once "includes/footer.php"; ?>
+    <?php require_once "includes/janela_avisos.php"; ?>
 </body>
 </html>
